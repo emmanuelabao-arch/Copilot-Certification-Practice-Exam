@@ -1,0 +1,275 @@
+import { q, REF } from './helpers';
+
+export const copilotFeatures = [
+  q({
+    id: 'FEAT-001',
+    type: 'single',
+    domain: 'copilot-features',
+    prompt: 'A gray inline suggestion from Copilot appears in your editor. Which key accepts the whole suggestion?',
+    options: [
+      { id: 'a', text: 'Tab', rationale: 'Correct. GitHub docs instruct you to press Tab to accept an inline suggestion.' },
+      { id: 'b', text: 'Esc', rationale: 'Esc dismisses or rejects suggestions.' },
+      { id: 'c', text: 'Enter', rationale: 'Enter inserts a new line; it does not accept the ghost text.' },
+      { id: 'd', text: 'Ctrl+S / Cmd+S', rationale: 'This saves the file and does not interact with suggestions.' },
+    ],
+    correctOptionIds: ['a'],
+    explanation: 'Inline suggestions appear as grayed "ghost text"; press Tab to accept or Esc to reject.',
+    referenceUrl: REF.ideSuggestions,
+  }),
+  q({
+    id: 'FEAT-002',
+    type: 'single',
+    domain: 'copilot-features',
+    prompt: 'What best describes agent mode in Copilot Chat in the IDE?',
+    options: [
+      { id: 'a', text: 'Copilot autonomously works on a task: it reads files, edits code, runs commands and tools, and self-corrects on errors.', rationale: 'Correct. Agent mode breaks a task into steps and uses tools to complete it.' },
+      { id: 'b', text: 'Copilot answers questions without proposing or making any file changes.', rationale: 'That describes asking questions in chat, not agent mode.' },
+      { id: 'c', text: 'Copilot automatically commits and pushes changes to the default branch without review.', rationale: 'Agent mode proposes and applies edits in your workspace; you remain responsible for reviewing them.' },
+      { id: 'd', text: 'A mode available only on GitHub.com, not in IDEs.', rationale: 'Agent mode is available in supported IDEs; administrators can disable it.' },
+    ],
+    correctOptionIds: ['a'],
+    explanation:
+      'Agent mode lets Copilot autonomously accomplish a set task, using tools to read files, edit code, and run commands, and correcting itself when something fails.',
+    referenceUrl: REF.chatInIde,
+  }),
+  q({
+    id: 'FEAT-003',
+    type: 'single',
+    domain: 'copilot-features',
+    prompt: 'What is the Model Context Protocol (MCP)?',
+    options: [
+      { id: 'a', text: 'An open standard defining how applications share context with LLMs, used to connect Copilot to external tools and data.', rationale: 'Correct. MCP servers extend Copilot with tools and data sources.' },
+      { id: 'b', text: 'GitHub\'s API for fine-tuning Copilot models on your code.', rationale: 'MCP is not a training or fine-tuning API.' },
+      { id: 'c', text: 'The file format used to define content exclusion rules.', rationale: 'Content exclusion is configured in repository, organization, or enterprise settings.' },
+      { id: 'd', text: 'A Microsoft certification for Copilot administrators.', rationale: 'MCP here is a protocol, not a credential.' },
+    ],
+    correctOptionIds: ['a'],
+    explanation:
+      'MCP provides a standardized way to connect AI models to different data sources and tools, so Copilot can use them in chat and agent workflows.',
+    referenceUrl: REF.mcp,
+  }),
+  q({
+    id: 'FEAT-004',
+    type: 'single',
+    domain: 'copilot-features',
+    prompt: 'Which Copilot Chat slash command generates unit tests for the selected code?',
+    options: [
+      { id: 'a', text: '/tests', rationale: 'Correct. /tests generates unit tests for the selected code.' },
+      { id: 'b', text: '/fix', rationale: '/fix proposes a fix for problems in the selected code.' },
+      { id: 'c', text: '/explain', rationale: '/explain describes how the code works.' },
+      { id: 'd', text: '/clear', rationale: '/clear starts a new chat session.' },
+    ],
+    correctOptionIds: ['a'],
+    explanation: 'Slash commands are shortcuts for common tasks; /tests is the one for generating unit tests.',
+    referenceUrl: REF.cheatSheet,
+  }),
+  q({
+    id: 'FEAT-005',
+    type: 'single',
+    domain: 'copilot-features',
+    prompt:
+      'In Copilot Chat in VS Code, which chat participant should you use for help creating or debugging shell commands?',
+    options: [
+      { id: 'a', text: '@terminal', rationale: 'Correct. @terminal has context about the VS Code terminal shell and its contents.' },
+      { id: 'b', text: '@vscode', rationale: '@vscode has context about VS Code commands and features, not shell commands.' },
+      { id: 'c', text: '@github', rationale: '@github provides GitHub-specific skills such as searching issues and pull requests.' },
+      { id: 'd', text: '@azure', rationale: '@azure helps with Azure services.' },
+    ],
+    correctOptionIds: ['a'],
+    explanation: 'Chat participants bring domain-specific context; @terminal is for terminal and shell help.',
+    referenceUrl: REF.cheatSheet,
+  }),
+  q({
+    id: 'FEAT-006',
+    type: 'single',
+    domain: 'copilot-features',
+    prompt: 'Where are repository-wide custom instructions for Copilot stored?',
+    options: [
+      { id: 'a', text: '.github/copilot-instructions.md', rationale: 'Correct. Repository-wide instructions live in this file.' },
+      { id: 'b', text: '.github/instructions/NAME.instructions.md', rationale: 'These files hold path-specific instructions, not repository-wide ones.' },
+      { id: 'c', text: '.vscode/copilot.json', rationale: 'This is not a Copilot custom instructions location.' },
+      { id: 'd', text: 'A YAML front-matter block in README.md', rationale: 'README content is not the custom instructions mechanism.' },
+    ],
+    correctOptionIds: ['a'],
+    explanation:
+      'Repository-wide custom instructions go in .github/copilot-instructions.md; path-specific instructions use NAME.instructions.md files under .github/instructions; agent instructions can use AGENTS.md.',
+    referenceUrl: REF.repoInstructions,
+  }),
+  q({
+    id: 'FEAT-007',
+    type: 'single',
+    domain: 'copilot-features',
+    prompt: 'How do prompt files differ from repository custom instructions?',
+    options: [
+      { id: 'a', text: 'You choose when to use a prompt file in chat; custom instructions are applied automatically.', rationale: 'Correct. Prompt files hold reusable, task-specific prompts that you invoke on demand.' },
+      { id: 'b', text: 'Prompt files are applied to every request automatically; custom instructions must be invoked manually.', rationale: 'This reverses the behavior.' },
+      { id: 'c', text: 'Prompt files configure which files Copilot is excluded from reading.', rationale: 'That is content exclusion, configured in settings.' },
+      { id: 'd', text: 'Prompt files store your past chat history.', rationale: 'Prompt files are authored instructions, not conversation logs.' },
+    ],
+    correctOptionIds: ['a'],
+    explanation:
+      'Prompt files provide task-specific instructions and context that you reuse by choosing them in chat, giving consistent results for repeated tasks.',
+    referenceUrl: REF.responseCustomization,
+  }),
+  q({
+    id: 'FEAT-008',
+    type: 'single',
+    domain: 'copilot-features',
+    prompt: 'By default, how does a Copilot code review affect a pull request\'s required approvals?',
+    options: [
+      { id: 'a', text: 'It does not count toward required approvals unless Copilot approvals are enabled in settings.', rationale: 'Correct. By default Copilot reviews do not count; admins can enable Copilot approvals.' },
+      { id: 'b', text: 'It always counts as one required approval.', rationale: 'Copilot reviews only count when Copilot approvals are explicitly enabled.' },
+      { id: 'c', text: 'It merges the pull request automatically if no problems are found.', rationale: 'Code review provides feedback; it does not merge pull requests.' },
+      { id: 'd', text: 'It blocks merging until every Copilot comment is resolved.', rationale: 'Copilot comments are not a merge requirement by default.' },
+    ],
+    correctOptionIds: ['a'],
+    explanation:
+      'Each Copilot review includes an approval assessment, but by default it does not satisfy required approvals. When enabled at repository, organization, and enterprise level, Copilot can submit an approving review.',
+    referenceUrl: REF.codeReview,
+  }),
+  q({
+    id: 'FEAT-009',
+    type: 'single',
+    domain: 'copilot-features',
+    prompt:
+      'A reviewer generates a Copilot pull request summary, then the author pushes more commits. What happens to the summary?',
+    options: [
+      { id: 'a', text: 'It is not refreshed automatically; request a new summary and review it.', rationale: 'Correct. PR summaries are created only when requested and are not auto-updated.' },
+      { id: 'b', text: 'It regenerates automatically on every push.', rationale: 'Summaries are generated on demand only.' },
+      { id: 'c', text: 'It is deleted when new commits arrive.', rationale: 'The existing summary stays; it just becomes potentially outdated.' },
+      { id: 'd', text: 'It locks the pull request until the summary is approved.', rationale: 'Summaries do not affect merge rules.' },
+    ],
+    correctOptionIds: ['a'],
+    explanation: 'Because summaries are not auto-updated, regenerate and re-review them after significant changes.',
+    referenceUrl: REF.chatRespUse,
+  }),
+  q({
+    id: 'FEAT-010',
+    type: 'multiple',
+    domain: 'copilot-features',
+    prompt: 'Which TWO are documented limits of a Copilot cloud agent session that runs on GitHub Actions?',
+    options: [
+      { id: 'a', text: 'It can only make changes in the repository specified when the task starts.', rationale: 'Correct. Actions-based sessions cannot change multiple repositories in one run.' },
+      { id: 'b', text: 'Each session has a maximum execution time of 59 minutes.', rationale: 'Correct. The limit cannot be extended; the session stops if exceeded.' },
+      { id: 'c', text: 'It can open several pull requests across many branches for one task.', rationale: 'Copilot works on one branch at a time and opens one pull request per task.' },
+      { id: 'd', text: 'Your local IDE must stay open for the session to continue.', rationale: 'The session runs in the cloud environment, independent of your IDE.' },
+    ],
+    correctOptionIds: ['a', 'b'],
+    explanation:
+      'Actions-based sessions are scoped to one repository, one branch and one pull request per task, and stop after 59 minutes.',
+    referenceUrl: REF.cloudAgent,
+  }),
+  q({
+    id: 'FEAT-011',
+    type: 'single',
+    domain: 'copilot-features',
+    prompt: 'Which command installs GitHub Copilot CLI globally using npm?',
+    options: [
+      { id: 'a', text: 'npm install -g @github/copilot', rationale: 'Correct. This is the documented npm install command.' },
+      { id: 'b', text: 'npm install -g copilot-vscode', rationale: 'Not the Copilot CLI package.' },
+      { id: 'c', text: 'pip install github-copilot', rationale: 'Copilot CLI is not distributed as this Python package.' },
+      { id: 'd', text: 'docker pull github/copilot', rationale: 'Copilot CLI is not installed from this container image.' },
+    ],
+    correctOptionIds: ['a'],
+    explanation: 'Copilot CLI is published to npm as @github/copilot; once installed, run `copilot` to start.',
+    referenceUrl: REF.cliInstall,
+  }),
+  q({
+    id: 'FEAT-012',
+    type: 'single',
+    domain: 'copilot-features',
+    prompt: 'You want to run GitHub Copilot CLI non-interactively from a script with a single prompt. What do you use?',
+    options: [
+      { id: 'a', text: 'The -p / --prompt command-line option.', rationale: 'Correct. This uses the programmatic interface.' },
+      { id: 'b', text: 'Run `copilot` with no arguments.', rationale: 'That starts an interactive session.' },
+      { id: 'c', text: 'The /compact slash command.', rationale: '/compact compresses session context in an interactive session.' },
+      { id: 'd', text: 'The --deny-tool option.', rationale: '--deny-tool blocks specific tools; it does not make the session programmatic.' },
+    ],
+    correctOptionIds: ['a'],
+    explanation:
+      'Copilot CLI has interactive and programmatic interfaces. Include -p or --prompt for programmatic use, plus approval options if it needs to modify or execute files.',
+    referenceUrl: REF.cliAbout,
+  }),
+  q({
+    id: 'FEAT-013',
+    type: 'single',
+    domain: 'copilot-features',
+    prompt:
+      "You start Copilot CLI with --allow-tool='My-MCP-Server' --deny-tool='My-MCP-Server(tool_name)'. What is the result?",
+    options: [
+      { id: 'a', text: 'All tools from My-MCP-Server run without approval except tool_name, which is denied.', rationale: 'Correct. --deny-tool takes precedence over --allow-tool.' },
+      { id: 'b', text: 'tool_name is allowed because --allow-tool is listed first.', rationale: 'Option order does not matter; deny takes precedence.' },
+      { id: 'c', text: 'Every tool on the server is denied.', rationale: 'Only the specified tool is denied.' },
+      { id: 'd', text: 'The CLI exits because the options conflict.', rationale: 'Combining allow and deny options is supported.' },
+    ],
+    correctOptionIds: ['a'],
+    explanation: 'Approval options can be combined for fine-grained control; --deny-tool overrides allow options.',
+    referenceUrl: REF.cliAbout,
+  }),
+  q({
+    id: 'FEAT-014',
+    type: 'single',
+    domain: 'copilot-features',
+    prompt:
+      'A compliance team wants to read the exact prompts developers type into Copilot in their IDEs using the enterprise audit log. What is true?',
+    options: [
+      { id: 'a', text: 'The audit log does not include client session data such as local prompts; a custom solution is needed.', rationale: 'Correct. GitHub states this explicitly.' },
+      { id: 'b', text: 'The audit log includes the full text of every prompt.', rationale: 'Prompt content from local sessions is not recorded in the audit log.' },
+      { id: 'c', text: 'Prompts are available through the Copilot user management REST API.', rationale: 'That API manages seats and subscriptions, not prompt content.' },
+      { id: 'd', text: 'Prompts appear in the audit log only when the public code filter is set to Block.', rationale: 'The public code setting does not change what the audit log records.' },
+    ],
+    correctOptionIds: ['a'],
+    explanation:
+      'Audit logs record administrative and agent activity (for example seat assignments; use actor:Copilot for agent activity), not local prompt content.',
+    referenceUrl: REF.auditLogs,
+  }),
+  q({
+    id: 'FEAT-015',
+    type: 'single',
+    domain: 'copilot-features',
+    prompt:
+      'An enterprise owner has set a Copilot feature policy to "disabled everywhere". An organization owner wants it enabled for their organization. What happens?',
+    options: [
+      { id: 'a', text: 'The organization owner cannot override the enterprise policy.', rationale: 'Correct. A specific enterprise policy cannot be overridden at organization level.' },
+      { id: 'b', text: 'Organization settings always override enterprise settings.', rationale: 'The enterprise policy takes precedence when set.' },
+      { id: 'c', text: 'Each developer can enable it in their IDE settings.', rationale: 'Individual editor settings do not bypass enterprise policies.' },
+      { id: 'd', text: 'It is enabled automatically after 30 days.', rationale: 'There is no automatic expiry of the policy.' },
+    ],
+    correctOptionIds: ['a'],
+    explanation:
+      'Policies can be set at enterprise level as enabled everywhere, disabled everywhere, or for selected organizations; organizations then cannot change that setting.',
+    referenceUrl: REF.orgPolicies,
+  }),
+  q({
+    id: 'FEAT-016',
+    type: 'multiple',
+    domain: 'copilot-features',
+    prompt: 'Which TWO tasks can you perform with the Copilot user management REST API for an organization?',
+    options: [
+      { id: 'a', text: 'List all Copilot seat assignments for the organization.', rationale: 'Correct. The API includes an endpoint to list seat assignments.' },
+      { id: 'b', text: 'Add teams to the organization\'s Copilot subscription.', rationale: 'Correct. Endpoints exist to add (and remove) teams and users.' },
+      { id: 'c', text: 'Download a user\'s Copilot Chat prompt history.', rationale: 'The user management API does not expose prompt content.' },
+      { id: 'd', text: 'Change a developer\'s local VS Code settings.', rationale: 'REST APIs on GitHub do not modify local editor settings.' },
+    ],
+    correctOptionIds: ['a', 'b'],
+    explanation:
+      'The REST API lets you get seat information, list seat assignments, and add or remove users and teams from the Copilot subscription.',
+    referenceUrl: REF.restSeats,
+  }),
+  q({
+    id: 'FEAT-017',
+    type: 'single',
+    domain: 'copilot-features',
+    prompt: 'What are Copilot Spaces used for?',
+    options: [
+      { id: 'a', text: 'Organizing context—repositories, code, issues, pull requests, notes, and files—that Copilot uses to answer questions.', rationale: 'Correct. Spaces ground Copilot in curated context and stay in sync as GitHub sources change.' },
+      { id: 'b', text: 'Running code in a hosted virtual machine.', rationale: 'Spaces are about context, not compute.' },
+      { id: 'c', text: 'Managing Copilot billing for an enterprise.', rationale: 'Billing is managed in enterprise settings.' },
+      { id: 'd', text: 'Queuing pull requests for Copilot code review.', rationale: 'Code review is requested on pull requests, not through Spaces.' },
+    ],
+    correctOptionIds: ['a'],
+    explanation:
+      'Spaces let you curate and share context; anyone with a Copilot license, including Copilot Free, can create and use them.',
+    referenceUrl: REF.spaces,
+  }),
+];
