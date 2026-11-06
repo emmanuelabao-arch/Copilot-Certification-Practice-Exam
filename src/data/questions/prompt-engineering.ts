@@ -1,0 +1,128 @@
+import { q, REF } from './helpers';
+
+export const promptEngineering = [
+  q({
+    id: 'PE-001',
+    type: 'single',
+    domain: 'prompt-engineering',
+    prompt: 'What distinguishes few-shot prompting from zero-shot prompting?',
+    options: [
+      { id: 'a', text: 'Few-shot prompts include examples of the desired input/output; zero-shot prompts give none.', rationale: 'Correct. Examples show the model the pattern you want.' },
+      { id: 'b', text: 'Few-shot prompts are limited to a few words.', rationale: 'The "shots" are examples, not words.' },
+      { id: 'c', text: 'Zero-shot prompts send no context at all to the model.', rationale: 'Zero-shot still includes instructions and context, just no examples.' },
+      { id: 'd', text: 'Few-shot prompting retrains the model with your examples.', rationale: 'Examples guide the response; they do not retrain the model.' },
+    ],
+    correctOptionIds: ['a'],
+    explanation:
+      'GitHub recommends giving examples—input data, outputs, or implementations—to help Copilot understand what you want.',
+    referenceUrl: REF.promptEngineering,
+  }),
+  q({
+    id: 'PE-002',
+    type: 'single',
+    domain: 'prompt-engineering',
+    prompt: 'According to GitHub\'s prompt engineering guidance, where should you put your most important requirements?',
+    options: [
+      { id: 'a', text: 'First, after a broad description of the goal.', rationale: 'Correct. Copilot gives extra weight to instructions at the beginning and end of a prompt.' },
+      { id: 'b', text: 'In the middle so they are surrounded by context.', rationale: 'The guidance favors the beginning (and end), not the middle.' },
+      { id: 'c', text: 'Only in a later follow-up message.', rationale: 'Leaving key requirements out of the initial prompt risks an off-target first answer.' },
+      { id: 'd', text: 'Order does not matter.', rationale: 'GitHub explicitly says position affects weighting.' },
+    ],
+    correctOptionIds: ['a'],
+    explanation: 'Start general, then get specific, and put the most important requirements first.',
+    referenceUrl: REF.promptEngineering,
+  }),
+  q({
+    id: 'PE-003',
+    type: 'multiple',
+    domain: 'prompt-engineering',
+    prompt: 'Which TWO are recommended prompt-crafting practices?',
+    options: [
+      { id: 'a', text: 'Break a complex task into multiple simpler tasks.', rationale: 'Correct. Smaller tasks produce more reliable results.' },
+      { id: 'b', text: 'Avoid ambiguity, for example name the specific function instead of saying "this".', rationale: 'Correct. Ambiguous references lead to off-target answers.' },
+      { id: 'c', text: 'Keep prompts vague so Copilot can be creative.', rationale: 'Vague prompts reduce relevance and accuracy.' },
+      { id: 'd', text: 'Combine every task for a feature into one very long prompt.', rationale: 'This is the opposite of breaking work into smaller tasks.' },
+    ],
+    correctOptionIds: ['a', 'b'],
+    explanation: 'Specific, unambiguous, well-scoped prompts produce better results; iterate when needed.',
+    referenceUrl: REF.promptEngineering,
+  }),
+  q({
+    id: 'PE-004',
+    type: 'single',
+    domain: 'prompt-engineering',
+    prompt: 'How can you improve inline code completions in your IDE through context?',
+    options: [
+      { id: 'a', text: 'Open relevant files and close irrelevant ones.', rationale: 'Correct. Copilot uses open files to understand your request.' },
+      { id: 'b', text: 'Close all files except the one you are editing.', rationale: 'This removes helpful related context.' },
+      { id: 'c', text: 'Open as many files as possible, related or not.', rationale: 'Irrelevant files add noise rather than useful context.' },
+      { id: 'd', text: 'Context has no effect on completions.', rationale: 'Context strongly influences suggestions.' },
+    ],
+    correctOptionIds: ['a'],
+    explanation: 'For completions, provide relevant context by keeping related files open and closing unrelated ones.',
+    referenceUrl: REF.promptEngineering,
+  }),
+  q({
+    id: 'PE-005',
+    type: 'single',
+    domain: 'prompt-engineering',
+    prompt:
+      'You finish a long chat about a payment module and now want help with an unrelated logging task. What does GitHub recommend?',
+    options: [
+      { id: 'a', text: 'Start a new conversation, because conversation history is used as context.', rationale: 'Correct. Keeping history relevant prevents old context from skewing answers.' },
+      { id: 'b', text: 'Continue in the same thread so Copilot has more context.', rationale: 'Unrelated history is noise, not helpful context.' },
+      { id: 'c', text: 'Restart your computer to clear Copilot\'s memory.', rationale: 'Starting a new conversation or session is sufficient.' },
+      { id: 'd', text: 'Paste the entire previous conversation into the new prompt.', rationale: 'This reintroduces the irrelevant context.' },
+    ],
+    correctOptionIds: ['a'],
+    explanation:
+      'Conversational surfaces use history as context; start a new conversation for a new task, and remove irrelevant turns where supported.',
+    referenceUrl: REF.promptEngineering,
+  }),
+  q({
+    id: 'PE-006',
+    type: 'single',
+    domain: 'prompt-engineering',
+    prompt: 'Which prompt is most likely to produce the function you want?',
+    options: [
+      { id: 'a', text: '"Write a JavaScript function that tells me if a number is prime. It should take an integer and return true if it is prime. It should throw if the input is not a positive integer."', rationale: 'Correct. It states the goal first, then specific inputs, outputs, and error behavior.' },
+      { id: 'b', text: '"Prime stuff"', rationale: 'Too vague: no language, inputs, outputs, or edge-case behavior.' },
+      { id: 'c', text: '"Make it better"', rationale: 'Ambiguous; "it" is undefined and no criteria are given.' },
+      { id: 'd', text: '"Write code."', rationale: 'Gives Copilot nothing to work with.' },
+    ],
+    correctOptionIds: ['a'],
+    explanation: 'Effective prompts describe the goal, then list specific requirements such as inputs, outputs, and error handling.',
+    referenceUrl: REF.promptEngineering,
+  }),
+  q({
+    id: 'PE-007',
+    type: 'single',
+    domain: 'prompt-engineering',
+    prompt: 'How can unit tests be used as a prompting technique?',
+    options: [
+      { id: 'a', text: 'Write the tests first, then ask Copilot to write a function that satisfies them.', rationale: 'Correct. GitHub notes that unit tests can serve as examples.' },
+      { id: 'b', text: 'Delete tests so Copilot is not constrained.', rationale: 'Tests are useful context and validation.' },
+      { id: 'c', text: 'Tests cannot be used as context in chat.', rationale: 'Tests can be attached or open as context.' },
+      { id: 'd', text: 'Only use tests after deploying to production.', rationale: 'Tests are most useful before code ships.' },
+    ],
+    correctOptionIds: ['a'],
+    explanation: 'Tests describe expected behavior precisely, making them good examples for Copilot.',
+    referenceUrl: REF.promptEngineering,
+  }),
+  q({
+    id: 'PE-008',
+    type: 'single',
+    domain: 'prompt-engineering',
+    prompt:
+      'In an IDE that supports chat variables, which variable adds only the text you have highlighted to the prompt?',
+    options: [
+      { id: 'a', text: '#selection', rationale: 'Correct. #selection includes the currently selected text.' },
+      { id: 'b', text: '#file', rationale: '#file includes the current file\'s content, not just the selection.' },
+      { id: 'c', text: '#project', rationale: '#project includes project-level context.' },
+      { id: 'd', text: '/clear', rationale: '/clear is a slash command that starts a new chat.' },
+    ],
+    correctOptionIds: ['a'],
+    explanation: 'Chat variables let you precisely control the context attached to a prompt.',
+    referenceUrl: REF.cheatSheet,
+  }),
+];
